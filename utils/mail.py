@@ -10,7 +10,9 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
 
-
+"""
+modified from  https://github.com/Samathy/py3mail
+"""
 class Mail:
     def __init__(self, receivers: list or None, host='localhost', user=None, password=None, sender=None, port=25):
         """
