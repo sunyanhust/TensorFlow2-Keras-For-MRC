@@ -310,7 +310,6 @@ if __name__ == '__main__':
 
     model = build_model(bert_model_path)
     model.summary()
-    exit(0)
 
     model.fit(
         x_train,
