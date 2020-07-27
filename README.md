@@ -14,6 +14,7 @@ BERT Paprer  Dev  Dataset EM:**80.8**  F1:**88.5**
 |  TPU   |    128     |     5e-5      |   Adam    | 78.2 | 86.0 |
 |  TPU   |    128     |     3e-5      |   Adam    | 78.5 | 86.5 |
 |  TPU   |    128     |     3e-5      |   Nadam   | 79.3 | 86.9 |
-|        |            |               |           |      |      |
-|        |            |               |           |      |      |
 
+## TODO List
+- [ ] Concat BERT last three  layers sequence output.
+- [ ] Mean five time output result. 

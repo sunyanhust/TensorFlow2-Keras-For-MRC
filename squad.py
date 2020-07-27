@@ -1,3 +1,7 @@
+"""
+modified from https://keras.io/examples/nlp/text_extraction_with_bert/
+"""
+
 import json
 import re
 import string
@@ -322,17 +326,3 @@ if __name__ == '__main__':
                    SendEmail()],
     )
 
-    """
-                                                                                   DEV
-                                                                                EM    F1
-    bert paper:                                                                80.8  88.5
-    
-    ours(TPU, batch_size=  6, leanring rate=5e-5, optimizer=adam):             72.5  81.7
-    ours(TPU, batch_size=  6, leanring rate=3e-5, optimizer=adam):             78.5  85.4
-    ours(TPU, batch_size= 64, leanring rate=5e-5, optimizer=adam):             76.4  84.6
-    ours(TPU, batch_size=128, leanring rate=5e-5, optimizer=adam):             78.2  86.0
-    ours(TPU, batch_size=128, leanring rate=3e-5, optimizer=adam):             78.5  86.5
-    ours(TPU, batch_size=128, leanring rate=3e-5, optimizer=Nadam):            79.3  86.9
-
-    ours(GPU, batch_size=6):                                                   73.8  82.4
-    """
