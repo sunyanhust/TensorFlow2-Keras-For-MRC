@@ -317,7 +317,7 @@ if __name__ == '__main__':
     model.summary()
     
     checkpoint = keras.callbacks.ModelCheckpoint("./", 
-                                                 monitor='val_loss', verbose=True, 
+                                                 monitor='loss', verbose=True, 
                                                  save_best_only=True, save_weights_only=True,
                                                  mode='auto')
     model.fit(
