@@ -15,6 +15,8 @@ BERT Paprer  Dev  Dataset EM:**80.8**  F1:**88.5**
 | bert-base-uncased |  TPU   |    128     |     3e-5      |   Adam    | 78.5 | 86.5 |
 | bert-base-uncased |  TPU   |    128     |     3e-5      |   Nadam   | 79.3 | 86.9 |
 
+[Colab Notebook](https://colab.research.google.com/drive/1h4Jy-iqwunPJpd200a0533tGlOGVinhL?usp=sharing)
+
 ## TODO List
 - [ ] Concat BERT last three  layers sequence output.
 - [ ] Mean five time output result. 
