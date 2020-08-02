@@ -10,7 +10,7 @@ from collections import Counter
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras import layers
+from tensorflow.keras import models, layers
 from tokenizers import BertWordPieceTokenizer
 from tqdm import tqdm
 from transformers import BertTokenizer, TFBertModel, BertConfig
@@ -157,7 +157,8 @@ def build_model(model_path):
     outputs = encoder(
         input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask
     )
-    _, _, hidden_states = outputs[0], outputs[1], outputs[2]
+    # https://github.com/huggingface/transformers/issues/6029
+    _, _, hidden_states = outputs[0], outputs[1], outputs[2] 
     sequence_output = layers.Concatenate(axis=-1)([hidden_states[-1], hidden_states[-2], hidden_states[-3]])
     start_logits = layers.Dense(1, name="start_logit", use_bias=False)(sequence_output)
     start_logits = layers.Flatten()(start_logits)
@@ -299,7 +300,7 @@ if __name__ == '__main__':
     tokenizer = BertTokenizer.from_pretrained(bert_model_path)
     tokenizer.save_pretrained(bert_model_path)
 
-    tokenizer = BertWordPieceTokenizer("/home/BIGO/MRC/bert_model/bert-base-uncased/vocab.txt", lowercase=True)
+    tokenizer = BertWordPieceTokenizer("bert_model/bert-base-uncased/vocab.txt", lowercase=True)
     train_squad_examples = create_squad_examples(data_path=train_path,
                                                  tokenizer=tokenizer,
                                                  max_len=max_len)
@@ -314,7 +315,11 @@ if __name__ == '__main__':
 
     model = build_model(bert_model_path)
     model.summary()
-
+    
+    checkpoint = keras.callbacks.ModelCheckpoint("./", 
+                                                 monitor='val_loss', verbose=True, 
+                                                 save_best_only=True, save_weights_only=True,
+                                                 mode='auto')
     model.fit(
         x_train,
         y_train,
@@ -323,6 +328,7 @@ if __name__ == '__main__':
         batch_size=6,
         callbacks=[ExactMatch(x_eval, y_eval),
                    F1Score(x_eval, y_eval),
-                   SendEmail()],
+                   SendEmail(), 
+                   checkpoint],
     )
 
