@@ -1,3 +1,7 @@
+"""
+modified from https://github.com/ShannonAI/service-streamer/blob/master/example/bert_model.py
+"""
+
 import logging
 import numpy as np
 from typing import List
